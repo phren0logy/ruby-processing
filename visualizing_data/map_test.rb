@@ -10,7 +10,7 @@ class MapTest < Processing::App
     @rowcount = 0
     @locations = []
     @data = []
-    CSV.open("/Users/andrewnanton/Documents/Programming/processing/ruby-processing/visualizing_data/data/random.tsv", 'r', col_sep = "\t") do |row|    
+    CSV.open("./visualizing_data/data/random.tsv", 'r', col_sep = "\t") do |row|    
        @data << row
     end
     
@@ -27,7 +27,7 @@ class MapTest < Processing::App
     background 0
     image @img, 0, 0
     
-   CSV.open("/Users/andrewnanton/Documents/Programming/processing/ruby-processing/visualizing_data/data/locations.tsv", 'r', col_sep = "\t") do |row|
+   CSV.open("./visualizing_data/data/locations.tsv", 'r', col_sep = "\t") do |row|
       x_position = row[1].to_i
       y_position = row[2].to_i
       @locations << [x_position, y_position]
