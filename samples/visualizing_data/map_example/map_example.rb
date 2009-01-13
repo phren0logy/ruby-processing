@@ -3,7 +3,7 @@ require 'ruby-processing'
 require 'csv'
 
 
-class MapTest < Processing::App
+class MapExample < Processing::App
 
   def setup
     @img = load_image("map.png")
@@ -38,13 +38,16 @@ class MapTest < Processing::App
     # the equivalent line number in @data, but it is not accessed by
     # state name as in the original example.
     @locations.each_with_index do |xy, index|
-      fill 255, 0, 0
-      size = map(@data[index][1].to_f, @data_min, @data_max, 2, 40)
+      value = @data[index][1].to_f
+      size = map(value, @data_min, @data_max, 2, 40)
       # map function is from processing, NOT from ruby.  It takes a
       # value, then two ranges of numbers.  The first range is the
       # original data min/max, and the second is target min/max.
       # It then scales the value to its proporional position in
       # the new range.  Ruby's map function is totally different.
+      percent = norm(value, @data_min, @data_max)
+      between = lerp_color('ff4422', '4422cc', percent)
+      fill 255, 0, 0
       ellipse xy[0], xy[1], size, size
     end
 
@@ -53,4 +56,4 @@ class MapTest < Processing::App
 
 end
 
-MapTest.new :title => "Map Test", :width => 640, :height => 400
+MapExample.new :title => "Map Test", :width => 640, :height => 400
